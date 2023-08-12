@@ -21,6 +21,9 @@ jobs:
           repository: hiroro-d/todo-front-app-router
           path: todo-front-app-router
 
+      - name: Create dist directory if not exists
+        run: mkdir -p todo-front-app-router/dist
+
       - name: Copy Swagger YAML to Frontend repository
         run: cp todo-api/dist/swagger.yml todo-front-app-router/dist/swagger.yml
 
