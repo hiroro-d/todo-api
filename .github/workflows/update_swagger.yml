@@ -20,6 +20,7 @@ jobs:
         with:
           repository: hiroro-d/todo-front-app-router
           path: todo-front-app-router
+          token: ${{ secrets.FRONTEND_REPO_TOKEN }}
 
       - name: Create dist directory if not exists
         run: mkdir -p todo-front-app-router/dist
