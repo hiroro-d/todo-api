@@ -1,0 +1,202 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: BASE API
+  description: BASE API
+servers:
+  - url: http://localhost:4010
+    description: Local Mock server
+  - url: http://localhost:3010
+    description: Local API server
+paths:
+  /beauticians/search:
+    get:
+      tags:
+        - common
+      summary: Get reservations by id
+      operationId: getBeauticianSearch
+      parameters:
+        - name: price_from
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: integer
+          example: 1000
+        - name: price_to
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: integer
+          example: 2000
+        - name: time_from
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: integer
+          example: '10:00:00'
+        - name: time_to
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: integer
+          example: '12:00:00'
+        - name: distance
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: integer
+          example: 10
+        - name: latitude
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: integer
+          example: 35.681236
+        - name: longitude
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: integer
+          example: 139.767125
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    email:
+                      type: string
+                    years_experience:
+                      type: integer
+                    position:
+                      type: string
+                    catchcopy:
+                      type: string
+                    is_completed:
+                      type: boolean
+                    avatar_url:
+                      type: string
+                    beauty_salon:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        owner_id:
+                          type: integer
+                        name:
+                          type: string
+                        postalcode:
+                          type: string
+                        address:
+                          type: string
+                        phone:
+                          type: string
+                        longitude:
+                          type: number
+                        latitude:
+                          type: number
+                      example:
+                        id: 1
+                        owner_id: 1
+                        name: サンプル美容院
+                        postalcode: 169-0051
+                        address: 東京都新宿区西早稲田3丁目31番11号 ニューライフ西早稲田ビル 別館5階
+                        phone: 03-62059-5308
+                        longitude: 139.7136386
+                        latitude: 35.713774
+                    maintenance:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        price:
+                          type: integer
+                        comment:
+                          type: string
+                        image_urls:
+                          type: array
+                          items:
+                            type: string
+                        menus:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              name:
+                                type: string
+                      example:
+                        id: 1
+                        price: 1000
+                        comment: どんなご要望も承ります
+                        image_urls:
+                          - http://localhost:3000/cut_image_1
+                          - http://localhost:3000/cut_image_2
+                          - http://localhost:3000/cut_image_3
+                        menus:
+                          - id: 0
+                            name: ボリュームダウン
+                          - id: 1
+                            name: 毛先カット
+                          - id: 2
+                            name: サイド刈り上げ
+                  example:
+                    id: 1
+                    name: 田中 太郎
+                    email: sample@example.com
+                    years_experience: 1
+                    position: 店長
+                    catchcopy: 指名No.1
+                    is_completed: true
+                    avatar_url: http://localhost:3000/avatar_url
+                    beauty_salon:
+                      id: 1
+                      owner_id: 1
+                      email: sample@example.com
+                      postalcode: 169-0051
+                      address: 東京都新宿区西早稲田3丁目31番11号 ニューライフ西早稲田ビル 別館5階
+                      phone: 03-6205-9530
+                      longitude: 139.7136386
+                      latitude: 35.713774
+                    maintenance:
+                      id: 1
+                      price: 1000
+                      comment: どんなご要望も承ります
+                      image_urls:
+                        - http://localhost:3000/cut_image_1
+                        - http://localhost:3000/cut_image_2
+                        - http://localhost:3000/cut_image_3
+                      menus:
+                        - id: 0
+                          name: ボリュームダウン
+                        - id: 1
+                          name: 毛先カット
+                        - id: 2
+                          name: サイド刈り上げ
+        '422':
+          description: A JSON object of error messsage
+          content:
+            application/json:
+              properties:
+                error:
+                  type: string
+                error_message:
+                  type: string
+              example:
+                error: Bad Request
+                error_message: リクエストが不正です。提供された値が無効である可能性があります。入力値を確認し、再度お試しください。
