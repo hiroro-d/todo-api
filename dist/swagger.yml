@@ -199,4 +199,4 @@ paths:
                   type: string
               example:
                 error: Bad Request
-                error_message: リクエストが不正です。提供された値が無効である可能性があります。入力値を確認し、再度お試しください。
+                error_message: リクエストが不正です。提供された値が無効である可能性があります。入力値を確認し、再度お試しくださいぴよ。
