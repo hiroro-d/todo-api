@@ -1,0 +1,34 @@
+name: Update Frontend with OpenAPI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout OpenAPI repository
+        uses: actions/checkout@v2
+        with:
+          path: todo-api
+
+      - name: Checkout Frontend repository
+        uses: actions/checkout@v2
+        with:
+          repository: hiroro-d/todo-front-app-router
+          path: todo-front-app-router
+
+      - name: Copy Swagger YAML to Frontend repository
+        run: cp todo-api/dist/swagger.yml todo-front-app-router/dist/swagger.yml
+
+      - name: Commit and Push to Frontend repository
+        working-directory: todo-front-app-router
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add dist/swagger.yml
+          git commit -m "Update Swagger YAML from OpenAPI repository"
+          git push
