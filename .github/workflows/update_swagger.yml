@@ -50,9 +50,6 @@ jobs:
           git commit -m "Update Swagger YAML from OpenAPI repository"
           git push origin feature/update-swagger
 
-      - name: Change to correct directory
-        run: cd todo-front-app-router
-
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
