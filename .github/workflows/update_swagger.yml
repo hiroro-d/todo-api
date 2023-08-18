@@ -48,6 +48,7 @@ jobs:
           git checkout -b feature/update-swagger
           git add api/ dist/swagger.yml
           git commit -m "Update Swagger YAML from OpenAPI repository"
+          git push origin feature/update-swagger
 
       - name: Change to correct directory
         run: cd todo-front-app-router
