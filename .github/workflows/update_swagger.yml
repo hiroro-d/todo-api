@@ -51,6 +51,7 @@ jobs:
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
+        working-directory: todo-front-app-router
         with:
           token: ${{ secrets.TEST_TOKEN }}
           title: "Update Swagger YAML from OpenAPI repository"
@@ -60,6 +61,7 @@ jobs:
 
       - name: Merge Pull Request
         uses: pascalgn/automerge-action@v0.13.0
+        working-directory: todo-front-app-router
         env:
           GITHUB_TOKEN: ${{ secrets.TEST_TOKEN }}
           MERGE_LABELS: "automerge"
