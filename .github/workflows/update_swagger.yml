@@ -22,7 +22,7 @@ jobs:
         with:
           repository: hiroro-d/todo-front-app-router
           path: todo-front-app-router
-          token: ${{ secrets.FRONTEND_REPO_TOKEN }}
+          token: ${{ secrets.FRONTEND_TYPES_TOKEN }}
 
       - name: Create dist directory if not exists
         run: mkdir -p todo-front-app-router/dist
@@ -53,7 +53,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.FRONTEND_REPO_TOKEN }}
+          token: ${{ secrets.FRONTEND_TYPES_TOKEN }}
           title: "Update Swagger YAML from OpenAPI repository"
           body: "This PR updates the Swagger YAML file."
           branch: "feature/update-swagger"
@@ -62,6 +62,6 @@ jobs:
       - name: Merge Pull Request
         uses: pascalgn/automerge-action@v0.13.0
         env:
-          GITHUB_TOKEN: ${{ secrets.FRONTEND_REPO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.FRONTEND_TYPES_TOKEN }}
           MERGE_LABELS: "automerge"
           MERGE_METHOD: "squash" # コミットを1つにまとめる
