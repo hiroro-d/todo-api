@@ -20,7 +20,7 @@ jobs:
       - name: Checkout Frontend repository
         uses: actions/checkout@v2
         with:
-          repository: prum-jp/todo-front-app-router
+          repository: hiroro-d/todo-front-app-router
           path: todo-front-app-router
           token: ${{ secrets.FRONTEND_TYPES_TOKEN }}
 
