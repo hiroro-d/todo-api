@@ -51,7 +51,7 @@ jobs:
           git commit -m "Update Swagger YAML from OpenAPI repository"
 
       - name: Create Pull Request
-        uses: hiroro-d/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.FRONTEND_TYPES_TOKEN }}
           title: "Update Swagger YAML from OpenAPI repository"
@@ -60,7 +60,7 @@ jobs:
           base: "main"
 
       - name: Merge Pull Request
-        uses: hiroro-d/automerge-action@v0.13.0
+        uses: pascalgn/automerge-action@v0.13.0
         env:
           GITHUB_TOKEN: ${{ secrets.FRONTEND_TYPES_TOKEN }}
           MERGE_LABELS: "automerge"
