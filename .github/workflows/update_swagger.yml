@@ -45,6 +45,7 @@ jobs:
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
+          git pull origin main # この行を追加
           git checkout -b feature/update-swagger
           git add api/ dist/swagger.yml
           git commit -m "Update Swagger YAML from OpenAPI repository"
