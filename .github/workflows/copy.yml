@@ -1,0 +1,67 @@
+# 概要：openAPIのmainが更新されると、フロントのリポジトリで型定義を生成するフロー
+
+name: Update Frontend with OpenAPI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout OpenAPI repository
+        uses: actions/checkout@v2
+        with:
+          path: todo-api
+
+      - name: Checkout Frontend repository
+        uses: actions/checkout@v2
+        with:
+          repository: prum-jp/todo-front-app-router
+          path: todo-front-app-router
+          token: ${{ secrets.FRONTEND_TYPES_TOKEN }}
+
+      - name: Create dist directory if not exists
+        run: mkdir -p todo-front-app-router/dist
+
+      - name: Copy Swagger YAML to Frontend repository
+        run: cp todo-api/dist/swagger.yml todo-front-app-router/dist/swagger.yml
+
+      # apiディレクトリが存在するとnpxコマンドで型定義生成できないので削除で対応
+      - name: Remove existing api directory
+        working-directory: todo-front-app-router
+        run: rm -rf api/
+
+      # 型定義自動生成
+      - name: Run openapi2aspida
+        working-directory: todo-front-app-router
+        run: npx openapi2aspida -i=dist/swagger.yml
+
+      # 型定義自動生成に関連するファイルをコミット
+      - name: Commit changes
+        working-directory: todo-front-app-router
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git checkout -b feature/update-swagger
+          git add api/ dist/swagger.yml
+          git commit -m "Update Swagger YAML from OpenAPI repository"
+
+      - name: Create Pull Request
+        uses: hiroro-d/create-pull-request@v3
+        with:
+          token: ${{ secrets.FRONTEND_TYPES_TOKEN }}
+          title: "Update Swagger YAML from OpenAPI repository"
+          body: "This PR updates the Swagger YAML file."
+          branch: "feature/update-swagger"
+          base: "develop"
+
+      - name: Merge Pull Request
+        uses: hiroro-d/automerge-action@v0.13.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.FRONTEND_TYPES_TOKEN }}
+          MERGE_LABELS: "automerge"
+          MERGE_METHOD: "squash" # コミットを1つにまとめる
