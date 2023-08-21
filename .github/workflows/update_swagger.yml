@@ -39,9 +39,9 @@ jobs:
         working-directory: todo-front-app-router
         run: npx openapi2aspida -i=dist/swagger.yml
 
-      # lint-Stage実行(prettier実行)
+      # int-stagedの実行(prettierの実行)
       - name: Run lint-staged
-        working-directory: mente-client
+        working-directory: todo-front-app-router
         run: npx lint-staged
 
       # 型定義自動生成に関連するファイルをコミット
