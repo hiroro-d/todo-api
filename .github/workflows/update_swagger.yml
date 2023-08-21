@@ -39,33 +39,20 @@ jobs:
         working-directory: todo-front-app-router
         run: npx openapi2aspida -i=dist/swagger.yml
 
+      # lint-Stage実行(prettier実行)
+      - name: Run lint-staged
+        working-directory: mente-client
+        run: npx lint-staged
+
       # 型定義自動生成に関連するファイルをコミット
       - name: Commit changes
         working-directory: todo-front-app-router
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git pull origin main # この行を追加
-          git checkout -b feature/update-swagger
           git add api/ dist/swagger.yml
           git commit -m "Update Swagger YAML from OpenAPI repository"
-          git push origin feature/update-swagger
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          token: ${{ secrets.TEST_TOKEN }}
-          title: "Update Swagger YAML from OpenAPI repository"
-          body: "This PR updates the Swagger YAML file."
-          branch: "feature/update-swagger"
-          base: "main"
-
-      - name: Merge Pull Request
-        uses: pascalgn/automerge-action@v0.13.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.TEST_TOKEN }}
-          MERGE_LABELS: "automerge"
-          MERGE_METHOD: "squash" # コミットを1つにまとめる
+          git push origin main
 
 # # updateffoka
 
