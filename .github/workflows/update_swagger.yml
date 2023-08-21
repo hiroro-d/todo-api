@@ -41,6 +41,7 @@ jobs:
 
       # int-stagedの実行(prettierの実行)
       - name: Run lint-staged
+        working-directory: todo-front-app-router
         run: npx lint-staged
 
       # 型定義自動生成に関連するファイルをコミット
