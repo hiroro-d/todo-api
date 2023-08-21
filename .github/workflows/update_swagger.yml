@@ -39,6 +39,11 @@ jobs:
         working-directory: todo-front-app-router
         run: npx openapi2aspida -i=dist/swagger.yml
 
+      # huskyの実行(prettierの実行)
+      - name: Run Husky
+        working-directory: todo-front-app-router
+        run: ./run-husky.sh
+
       # 型定義自動生成に関連するファイルをコミット
       - name: Commit changes
         working-directory: todo-front-app-router
