@@ -1,0 +1,27 @@
+name: Update Frontend with OpenAPI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout current repository
+        uses: actions/checkout@v2
+
+      - name: Checkout OpenAPI repository
+        uses: actions/checkout@v2
+        with:
+          repository: 'hiroro-d/todo-front-app-router'
+          path: todo-front-app-router
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: "自動で作成されたプルリクエスト"
+          branch: "feature/my-simple-feature"
+          base: "develop"
