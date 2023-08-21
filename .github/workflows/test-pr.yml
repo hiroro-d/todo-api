@@ -28,4 +28,4 @@ jobs:
           draft: false
           title: "自動で作成されたプルリクエスト"
           branch: "feature/my-simple-feature"
-          base: "develop"
+          base: "main"
