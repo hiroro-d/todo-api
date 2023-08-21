@@ -1,31 +1,31 @@
-name: Update Frontend with OpenAPI
+# name: Update Frontend with OpenAPI
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  update-frontend:
-    runs-on: ubuntu-latest
+# jobs:
+#   update-frontend:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout current repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0 # すべての履歴を取得
+#     steps:
+#       - name: Checkout current repository
+#         uses: actions/checkout@v2
+#         with:
+#           fetch-depth: 0 # すべての履歴を取得
 
-      # 必要な処理
+#       # 必要な処理
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          commit-message: "[create-pull-request] automated change"
-          committer: GitHub <noreply@github.com>
-          author: hiroro-d <hiroro-d@users.noreply.github.com>
-          signoff: false
-          delete-branch: false
-          draft: false
-          title: "自動で作成されたプルリクエスト"
-          branch: "feature/my-simple-feature"
-          base: "main"
+#       - name: Create Pull Request
+#         uses: peter-evans/create-pull-request@v3
+#         with:
+#           commit-message: "[create-pull-request] automated change"
+#           committer: GitHub <noreply@github.com>
+#           author: hiroro-d <hiroro-d@users.noreply.github.com>
+#           signoff: false
+#           delete-branch: false
+#           draft: false
+#           title: "自動で作成されたプルリクエスト"
+#           branch: "feature/my-simple-feature"
+#           base: "main"
