@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 0 # すべての履歴を取得
 
-      # 必要な処理を追加
+      # 必要な処理
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
